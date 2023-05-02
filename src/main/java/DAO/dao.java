@@ -73,7 +73,7 @@ public class dao {
 				dto.setAttend(rs.getInt(9));
 				dto.setReport(rs.getInt(10));
 				dto.setEtc(rs.getInt(11));
-				dto.setScore(rs.getInt(12));
+				dto.setScore(rs.getString(12));
 				dto.setGrade(rs.getString(13));
 				
 				list.add(dto);
@@ -88,5 +88,92 @@ public class dao {
 			e.printStackTrace();
 		}
 		return "inquire.jsp";
+	}
+	
+	public int insert (HttpServletRequest request, HttpServletResponse response) {
+		String stid = request.getParameter("stid");
+		String dtcode = request.getParameter("dtcode");
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int finall = Integer.parseInt(request.getParameter("finall"));
+		int attend = Integer.parseInt(request.getParameter("attend"));
+		int report = Integer.parseInt(request.getParameter("report"));
+		int etc = Integer.parseInt(request.getParameter("etc"));
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			String sql = "insert into table_result_03 values (?, ?, ?, ?, ?, ?, ?)";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, stid);
+			ps.setString(2, dtcode);
+			ps.setInt(3, mid);
+			ps.setInt(4, finall);
+			ps.setInt(5, attend);
+			ps.setInt(6, report);
+			ps.setInt(7, etc);
+			
+			result = ps.executeUpdate();
+			
+			conn.close();
+			ps.close();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public String statistics (HttpServletRequest request, HttpServletResponse response) {
+		
+		ArrayList<dto> slist = new ArrayList<dto>();
+		
+		try {
+			
+			conn = getConnection();
+			String sql = "select"
+					+ "	decode(s.course,'AD','전문학사','BD','학사','MD','석사','DD','박사'),"
+					+ "	s.stid,"
+					+ "	s.stname,"
+					+ " count(r.dtcode) || '과목' as subcount,"
+					+ " round((sum((r.mid*0.3)+(r.finall*0.3)+(r.attend*0.2)+(r.report*0.1)+(r.etc*0.1)))) as totalscore,"
+					+ " round(sum(((r.mid*0.3)+(r.finall*0.3)+(r.attend*0.2)+(r.report*0.1)+(r.etc*0.1))) / count(r.dtcode),1) as average"
+					+ " from table_std_01 s"
+					+ " join table_result_03 r"
+					+ " on s.stid = r.stid"
+					+ " join table_subject_02 b"
+					+ " on b.subjectcode = r.dtcode"
+					+ " group by s.stid, decode(s.course,'AD','전문학사','BD','학사','MD','석사','DD','박사'), s.stname"
+					+ " order by s.stid desc";
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				dto dto = new dto();
+				
+				dto.setCourse(rs.getString(1));
+				dto.setStid(rs.getString(2));
+				dto.setStname(rs.getString(3));
+				dto.setSubcount(rs.getString(4));
+				dto.setTotalscore(rs.getInt(5));
+				dto.setAverage(rs.getString(6));
+				
+				slist.add(dto);
+			}
+			
+			request.setAttribute("slist", slist);
+			
+			conn.close();
+			ps.close();
+			rs.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "statistics.jsp";
 	}
 }

@@ -10,9 +10,9 @@ function fn_submit(){
 	fn.stid.focus();
 	return false;
 	}
-	if(fn.subjectcode.value ==""){
+	if(fn.dtcode.value ==""){
 	alert("과목코드가 입력되지 않았습니다!");
-	fn.subjectcode.focus();
+	fn.dtcode.focus();
 	return false;
 	}
 	if(fn.mid.value ==""){
@@ -20,9 +20,9 @@ function fn_submit(){
 	fn.mid.focus();
 	return false;
 	}
-	if(fn.final.value ==""){
+	if(fn.finall.value ==""){
 	alert("기말(30%)(0~100)이 입력되지 않았습니다!");
-	fn.final.focus();
+	fn.finall.focus();
 	return false;
 	}
 	if(fn.attend.value ==""){

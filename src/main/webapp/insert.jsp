@@ -24,7 +24,7 @@
 					<tr>
 						<th>과목코드</th>
 						<td>
-						<input type="text" name="subjectcode">예)SS01
+						<input type="text" name="dtcode">예)SS01
 						</td>
 					</tr>
 					<tr>
@@ -36,7 +36,7 @@
 					<tr>
 						<th>기말(30%)(0~100)</th>
 						<td>
-						<input type="text" name="final">점
+						<input type="text" name="finall">점
 						</td>
 					</tr>
 					<tr>
@@ -59,7 +59,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<button type="insert" class="btn" onclick="fn_submit(); return false;">등 록</button>
+							<button type="submit" class="btn" onclick="fn_submit(); return false;">등 록</button>
 							<button type="reset" class="btn" onclick="fn_reset();">다시쓰기</button>
 						</td>
 					</tr>

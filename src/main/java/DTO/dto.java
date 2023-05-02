@@ -4,7 +4,7 @@ public class dto {
 	String stid;
 	String stname;
 	String gender;
-	String subjectcode;
+	String dtcode;
 	String subject;
 	String classes;
 	String professor;
@@ -13,12 +13,13 @@ public class dto {
 	int attend;
 	int report;
 	int etc;
-	int score;
+	String score;
 	String grade;
 	String course;
-	int subcount;
+	String subcount;
 	int totalscore;
-	int average;
+	String average;
+	
 	public String getStid() {
 		return stid;
 	}
@@ -37,11 +38,12 @@ public class dto {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getSubjectcode() {
-		return subjectcode;
+	
+	public String getDtcode() {
+		return dtcode;
 	}
-	public void setSubjectcode(String subjectcode) {
-		this.subjectcode = subjectcode;
+	public void setDtcode(String dtcode) {
+		this.dtcode = dtcode;
 	}
 	public String getSubject() {
 		return subject;
@@ -91,10 +93,10 @@ public class dto {
 	public void setEtc(int etc) {
 		this.etc = etc;
 	}
-	public int getScore() {
+	public String getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(String score) {
 		this.score = score;
 	}
 	public String getGrade() {
@@ -109,10 +111,11 @@ public class dto {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-	public int getSubcount() {
+
+	public String getSubcount() {
 		return subcount;
 	}
-	public void setSubcount(int subcount) {
+	public void setSubcount(String subcount) {
 		this.subcount = subcount;
 	}
 	public int getTotalscore() {
@@ -121,12 +124,13 @@ public class dto {
 	public void setTotalscore(int totalscore) {
 		this.totalscore = totalscore;
 	}
-	public int getAverage() {
+	public String getAverage() {
 		return average;
 	}
-	public void setAverage(int average) {
+	public void setAverage(String average) {
 		this.average = average;
 	}
+	
 	
 	
 }
